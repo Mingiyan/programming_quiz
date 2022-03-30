@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URL}
+
+bot:
+  token: ${BOT_TOKEN}
+  base-url: ${BOT_BASE_URL}
+  username: ${BOT_USERNAME}
