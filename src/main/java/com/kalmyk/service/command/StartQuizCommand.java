@@ -4,19 +4,29 @@ import com.kalmyk.model.Question;
 import com.kalmyk.model.Tag;
 import com.kalmyk.service.QuestionService;
 import com.kalmyk.service.button.AnswerButtonsService;
-import lombok.RequiredArgsConstructor;
+import com.kalmyk.service.utils.TelegramUtils;
+
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 @Service
-@RequiredArgsConstructor
 public class StartQuizCommand implements Command {
 
     private final QuestionService questionService;
     private final AnswerButtonsService answerButtonsService;
+    private final TelegramUtils telegramUtils;
+
+    public StartQuizCommand(QuestionService questionService,
+                            AnswerButtonsService answerButtonsService,
+                            TelegramUtils telegramUtils) {
+        this.questionService = questionService;
+        this.answerButtonsService = answerButtonsService;
+        this.telegramUtils = telegramUtils;
+    }
 
     @Override
     public String commandDescription() {
@@ -49,6 +59,12 @@ public class StartQuizCommand implements Command {
 
     @Override
     public BotApiMethod process(SessionContext context, Update update) {
+        Message incomingMsg = telegramUtils.getMessage(update);
+
+        BotApiMethod method;
+        Question question = questionService.processQuiz(context.getQuizContext(), update.getCallbackQuery());
+
+
         return null;
     }
 

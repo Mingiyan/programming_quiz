@@ -5,6 +5,7 @@ import com.kalmyk.model.Tag;
 import com.kalmyk.repository.QuestionRepository;
 import com.kalmyk.service.command.QuizContext;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +42,22 @@ public class QuestionService {
         Question question = questionList.get(number);
         questionList.remove(number);
         return question;
+    }
+
+    public Question processQuiz(QuizContext quizContext, CallbackQuery callbackQuery) {
+        Question lastQuestion = quizContext.getAskedQuestions().get(quizContext.getAskedQuestions().size() - 1);
+        boolean isCorrectAnswer = lastQuestion.getCorrectAnswer().getAnswer().equalsIgnoreCase(callbackQuery.getData());
+        if (isCorrectAnswer) {
+            quizContext.setCorrectAnswers(quizContext.getCorrectAnswers() + 1);
+        }
+
+        if (quizContext.getAskedQuestions().size() == quizContext.getQuizSize()) {
+            //todo very bad
+            return null;
+        } else {
+            Question question = getRandomQuestion();
+            quizContext.getAskedQuestions().add(question);
+            return question;
+        }
     }
 }

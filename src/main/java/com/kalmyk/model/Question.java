@@ -24,4 +24,6 @@ public class Question {
     private Answer correctAnswer;
 
     private Set<Tag> tags;
+
+    private Boolean isImage;
 }
