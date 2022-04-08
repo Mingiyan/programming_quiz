@@ -1,12 +1,12 @@
 package com.kalmyk.service.command;
 
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public interface Command {
     String commandDescription();
     String commandName();
-    BotApiMethod execute(SessionContext context);
-    BotApiMethod process(SessionContext context, Update update);
+    PartialBotApiMethod execute(SessionContext context);
+    PartialBotApiMethod process(SessionContext context, Update update);
     boolean isPublic();
 }

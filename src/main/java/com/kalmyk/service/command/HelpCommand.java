@@ -2,7 +2,7 @@ package com.kalmyk.service.command;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Set;
@@ -24,12 +24,12 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public BotApiMethod execute(SessionContext context) {
+    public PartialBotApiMethod execute(SessionContext context) {
         return null;
     }
 
     @Override
-    public BotApiMethod process(SessionContext context, Update update) {
+    public PartialBotApiMethod process(SessionContext context, Update update) {
         throw new UnsupportedOperationException("Help command is not supported 'process' method");
     }
 
