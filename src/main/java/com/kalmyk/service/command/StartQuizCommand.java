@@ -120,6 +120,6 @@ public class StartQuizCommand implements Command {
 
     @Override
     public boolean isPublic() {
-        return false;
+        return true;
     }
 }
