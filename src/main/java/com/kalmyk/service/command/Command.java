@@ -6,7 +6,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public interface Command {
     String commandDescription();
     String commandName();
-    PartialBotApiMethod execute(SessionContext context);
-    PartialBotApiMethod process(SessionContext context, Update update);
+    <T extends PartialBotApiMethod> T execute(SessionContext context);
+    <T extends PartialBotApiMethod> T process(SessionContext context, Update update);
     boolean isPublic();
 }
+
