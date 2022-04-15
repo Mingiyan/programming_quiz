@@ -7,13 +7,17 @@ import com.kalmyk.service.button.AnswerButtonsService;
 import com.kalmyk.service.utils.TelegramUtils;
 
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class StartQuizCommand implements Command {
@@ -113,6 +117,18 @@ public class StartQuizCommand implements Command {
             } else {
                 message = "\u274c No!";
             }
+            InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+            List<InlineKeyboardButton> button = new ArrayList<>();
+            InlineKeyboardButton buttonBack = new InlineKeyboardButton();
+            buttonBack.setText("Back").setCallbackData("/help");
+            button.add(buttonBack);
+            inlineKeyboardMarkup.setKeyboard(Collections.singletonList(button));
+            SendMessage sendMessage = new SendMessage(incomingMsg.getChatId(),
+                    "Correct answers " + context.getQuizContext().getCorrectAnswers() + "/" +
+                            context.getQuizContext().getAskedQuestions().size() + "\n").setReplyMarkup(inlineKeyboardMarkup);
+            context.setQuizContext(null);
+            context.setActiveCommand(null);
+            method = sendMessage;
         }
 
         return method;
