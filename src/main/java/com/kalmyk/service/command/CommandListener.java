@@ -43,29 +43,29 @@ public class CommandListener {
         BotApiMethod botApiMethod;
 
         if (update.hasMessage()) {
-            botApiMethod = helpCommand.execute(context);
+            botApiMethod = (BotApiMethod) helpCommand.execute(context);
         } else {
             switch (update.getCallbackQuery().getData()) {
                 case "/help":
-                    botApiMethod = helpCommand.execute(context);
+                    botApiMethod = (BotApiMethod) helpCommand.execute(context);
                     break;
                 case "/startQuiz":
-                    botApiMethod = startQuizCommand.execute(context);
+                    botApiMethod = (BotApiMethod) startQuizCommand.execute(context);
                     break;
                 case "startJavaQuiz":
-                    botApiMethod = startQuizCommand.executeWithTag(context, "java");
+                    botApiMethod = (BotApiMethod) startQuizCommand.executeWithTag(context, "java");
                     break;
                 case "startPythonQuiz":
-                    botApiMethod = startQuizCommand.executeWithTag(context, "python");
+                    botApiMethod = (BotApiMethod) startQuizCommand.executeWithTag(context, "python");
                     break;
                 case "startSqlQuiz":
-                    botApiMethod = startQuizCommand.executeWithTag(context, "sql");
+                    botApiMethod = (BotApiMethod) startQuizCommand.executeWithTag(context, "sql");
                     break;
                 default:
                     if (context.getActiveCommand() != null) {
                         botApiMethod = activeCommandMap.get(context.getActiveCommand()).process(context, update);
                     } else {
-                        botApiMethod = helpCommand.execute(context);
+                        botApiMethod = (BotApiMethod) helpCommand.execute(context);
                     }
             }
         }
