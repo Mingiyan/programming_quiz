@@ -133,6 +133,12 @@ public class StartQuizCommand implements Command {
         return method;
     }
 
+
+    private void sendMessage(Long chatId, String message) {
+        SendMessage sendMessage = new SendMessage();
+
+    }
+
     @Override
     public boolean isPublic() {
         return true;
