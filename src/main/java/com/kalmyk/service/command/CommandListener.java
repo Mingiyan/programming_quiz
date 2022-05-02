@@ -52,13 +52,13 @@ public class CommandListener {
                 case "/startQuiz":
                     botApiMethod = (BotApiMethod) startQuizCommand.execute(context);
                     break;
-                case "startJavaQuiz":
+                case "/startJavaQuiz":
                     botApiMethod = (BotApiMethod) startQuizCommand.executeWithTag(context, "java");
                     break;
-                case "startPythonQuiz":
+                case "/startPythonQuiz":
                     botApiMethod = (BotApiMethod) startQuizCommand.executeWithTag(context, "python");
                     break;
-                case "startSqlQuiz":
+                case "/startSqlQuiz":
                     botApiMethod = (BotApiMethod) startQuizCommand.executeWithTag(context, "sql");
                     break;
                 default:

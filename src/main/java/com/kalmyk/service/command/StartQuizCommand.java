@@ -134,9 +134,12 @@ public class StartQuizCommand implements Command {
     }
 
 
-    private void sendMessage(Long chatId, String message) {
+    private SendMessage sendCorrectMessage(Long chatId, String message) {
         SendMessage sendMessage = new SendMessage();
-
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(message);
+        sendMessage.enableHtml(true);
+        return sendMessage;
     }
 
     @Override
