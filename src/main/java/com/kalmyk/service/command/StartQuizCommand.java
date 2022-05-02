@@ -6,6 +6,7 @@ import com.kalmyk.service.QuestionService;
 import com.kalmyk.service.button.AnswerButtonsService;
 import com.kalmyk.service.utils.TelegramUtils;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -138,7 +139,7 @@ public class StartQuizCommand implements Command {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(message);
-        sendMessage.enableHtml(true);
+        sendMessage.setParseMode(ParseMode.HTML);
         return sendMessage;
     }
 
